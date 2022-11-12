@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HittingScript : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class HittingScript : MonoBehaviour
     private List<GameObject> _hitTargets = new List<GameObject>();
     bool _isEnemy = false;
     [SerializeField] private int _damageAmount = 1;
+    [SerializeField] Slider _unitHealthBarSlider;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,7 +42,24 @@ public class HittingScript : MonoBehaviour
         {
             _allyMovementScript.StopMovement();
         }
-        transform.right = (_hitTargets[0].transform.position - transform.position);
+        if (this.transform.position.x - m_targetToHit.transform.position.x < 0 ) //target is to the right
+        {
+           // this.gameObject.GetComponent<SpriteRenderer>().flipX = true;
+
+            transform.right = Vector3.left;
+            _unitHealthBarSlider.direction = Slider.Direction.RightToLeft;
+
+        }
+        else  if (this.transform.position.x - m_targetToHit.transform.position.x < 0 ) //target is to the left
+
+        {
+            //this.gameObject.GetComponent<SpriteRenderer>().flipX = false;
+            transform.right = Vector3.right;
+            _unitHealthBarSlider.direction = Slider.Direction.LeftToRight;
+
+
+        }
+        //transform.right = (_hitTargets[0].transform.position - transform.position); //make target look at what its hitting
     }
     public void HitTarget()
     {

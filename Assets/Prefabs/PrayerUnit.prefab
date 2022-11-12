@@ -30,7 +30,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 632358576662789365}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &632358575703695883
 SpriteRenderer:
@@ -114,7 +114,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 632358576662789365}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -29.644}
 --- !u!212 &632358576431099810
 SpriteRenderer:
@@ -201,10 +201,10 @@ Transform:
   m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 3760990330755362506}
   - {fileID: 4683433616330588591}
   - {fileID: 632358575703695882}
   - {fileID: 632358576431099809}
-  - {fileID: 3760990330755362506}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -221,6 +221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damageAmount: 0
+  _unitHealthBarSlider: {fileID: 3760990328797927522}
 --- !u!114 &632358576662789367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -570,7 +571,7 @@ RectTransform:
   m_Children:
   - {fileID: 4683433615105079044}
   m_Father: {fileID: 632358576662789365}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -596,7 +597,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!114 &4683433616330588589
 MonoBehaviour:
@@ -683,7 +684,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4393030544481764280, guid: 982b363bfcc137a4fa0cde2b5db3cec8, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4393030544481764280, guid: 982b363bfcc137a4fa0cde2b5db3cec8, type: 3}
       propertyPath: m_AnchorMax.x
@@ -765,8 +766,23 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4393030544481764283, guid: 982b363bfcc137a4fa0cde2b5db3cec8, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 982b363bfcc137a4fa0cde2b5db3cec8, type: 3}
+--- !u!114 &3760990328797927522 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4393030544304305424, guid: 982b363bfcc137a4fa0cde2b5db3cec8, type: 3}
+  m_PrefabInstance: {fileID: 632358575898684786}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3760990328797927523 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4393030544304305425, guid: 982b363bfcc137a4fa0cde2b5db3cec8, type: 3}
