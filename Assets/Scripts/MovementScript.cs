@@ -9,7 +9,12 @@ public class MovementScript : MonoBehaviour
 
     [SerializeField] bool _isPatrol = false;
     [SerializeField] List<GameObject> _patrolPoints;
+    [SerializeField] Sprite _flagUp;
+    [SerializeField] Sprite _flagDown;
+
     int _currentPatrolPoint = 0;
+    int _lastControlPoint = 0;
+
     [SerializeField] Color TrackingColour = Color.blue;
     [SerializeField] Color DefaultColor = Color.yellow;
 
@@ -18,6 +23,8 @@ public class MovementScript : MonoBehaviour
     {
         _tempSpeed = _moveSpeed;
         _patrolPoints[_currentPatrolPoint].GetComponent<SpriteRenderer>().color = TrackingColour;
+        _patrolPoints[_currentPatrolPoint].GetComponent<SpriteRenderer>().sprite = _flagUp;
+
     }
 
     // Update is called once per frame
@@ -38,16 +45,24 @@ public class MovementScript : MonoBehaviour
     {
         if (_isPatrol) //turn move direction when you reach the patrol point
         {
-            if (col.gameObject.tag == "PatrolPoint")
+            if (col.gameObject == _patrolPoints[_currentPatrolPoint])
             {
-                _patrolPoints[_currentPatrolPoint].GetComponent<SpriteRenderer>().color = DefaultColor; //set last point to reg colour
-                _currentPatrolPoint++;
-
-                if (_currentPatrolPoint >= _patrolPoints.Count)
+                if (_currentPatrolPoint == 0 && col.gameObject.name == "PatrolPoint1")
+                {
+                    _currentPatrolPoint = 1;
+                    _lastControlPoint = 0;
+                }
+                else if (_currentPatrolPoint == 1 && col.gameObject.name == "PatrolPoint2")
                 {
                     _currentPatrolPoint = 0;
+                    _lastControlPoint = 1;
+                    
                 }
+                _patrolPoints[_lastControlPoint].GetComponent<SpriteRenderer>().color = DefaultColor; //set last point to reg colour
+                _patrolPoints[_lastControlPoint].GetComponent<SpriteRenderer>().sprite = _flagDown;
                 _patrolPoints[_currentPatrolPoint].GetComponent<SpriteRenderer>().color = TrackingColour; //set next point to tacking colour
+                _patrolPoints[_currentPatrolPoint].GetComponent<SpriteRenderer>().sprite = _flagUp;
+
             }
         }
 

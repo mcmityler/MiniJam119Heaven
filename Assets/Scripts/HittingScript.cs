@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class HittingScript : MonoBehaviour
 {
-    [SerializeField] EnemyMovementScript _enemyMovement;
-    [SerializeField] MovementScript _allyMovementScript;
+    EnemyMovementScript _enemyMovement;
+    MovementScript _allyMovementScript;
     private List<GameObject> _hitTargets = new List<GameObject>();
     bool _isEnemy = false;
     [SerializeField] private int _damageAmount = 1;
@@ -19,8 +19,10 @@ public class HittingScript : MonoBehaviour
         if (_isEnemy)
         {
             _enemyMovement = this.gameObject.GetComponent<EnemyMovementScript>();
-        }else{
-_allyMovementScript = this.gameObject.GetComponent<MovementScript>();
+        }
+        else
+        {
+            _allyMovementScript = this.gameObject.GetComponent<MovementScript>();
         }
     }
     public void InAttackRange(GameObject m_targetToHit) //add targets to hit targets when they are in range of the trigger
@@ -32,14 +34,15 @@ _allyMovementScript = this.gameObject.GetComponent<MovementScript>();
         if (_isEnemy)
         {
             _enemyMovement.StopMovement();
-        }else{
+        }
+        else
+        {
             _allyMovementScript.StopMovement();
         }
-        transform.right = -(_hitTargets[0].transform.position - transform.position);
+        transform.right = (_hitTargets[0].transform.position - transform.position);
     }
     public void HitTarget()
     {
-        Debug.Log("Damage target");
         List<GameObject> m_hitTargetsTemp = new List<GameObject>(_hitTargets); //rotate through all object in hit range
         foreach (var m_hitTarget in m_hitTargetsTemp)
         {
@@ -65,13 +68,19 @@ _allyMovementScript = this.gameObject.GetComponent<MovementScript>();
     }
     public void HitObjectKilled()
     {
-        this.gameObject.GetComponent<Animator>().SetTrigger("Move");
-        if (_isEnemy)
+        if (_hitTargets.Count == 0)
         {
-            _enemyMovement.ResumeMovement();
-        }else{
-            _allyMovementScript.ResumeMovement();
+            this.gameObject.GetComponent<Animator>().SetTrigger("Move");
+            if (_isEnemy)
+            {
+                _enemyMovement.ResumeMovement();
+            }
+            else
+            {
+                _allyMovementScript.ResumeMovement();
+            }
         }
+
     }
 
     void OnTriggerEnter2D(Collider2D col)
@@ -79,7 +88,10 @@ _allyMovementScript = this.gameObject.GetComponent<MovementScript>();
         if (col.gameObject.tag == "Enemy" && this.gameObject.tag == "Ally")
         {
             col.gameObject.GetComponent<HittingScript>().InAttackRange(this.gameObject);
-            InAttackRange(col.gameObject);
+            if (_allyMovementScript != null)
+            {
+                InAttackRange(col.gameObject);
+            }
         }
     }
 }
