@@ -246,6 +246,7 @@ MonoBehaviour:
   _maxHealth: 3
   _healthbar: {fileID: 3670400256749588894}
   _isPatrol: 0
+  _isHeavensGate: 0
 --- !u!114 &1015789964094245443
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,5 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
+/*
+By Tyler McMillan
+Description: Script Attatched to basic enemies to make them move towards the heavens gate
+*/
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,12 +12,19 @@ public class EnemyMovementScript : MonoBehaviour
     [SerializeField] float _moveSpeed = 1f;
     float _tempSpeed; //holds speed when it stops
     [SerializeField] Slider _unitHealthBarSlider;
+    bool _isBeamable = false;
 
     // Start is called before the first frame update
     void Start()
     {
         _heavenGate = GameObject.FindGameObjectWithTag("HeavenGate");
         _tempSpeed = _moveSpeed;
+    }
+    public void SetBeamable(){
+        _isBeamable = true;
+    }
+    public bool GetBeamable(){
+        return _isBeamable;
     }
 
     // Update is called once per frame

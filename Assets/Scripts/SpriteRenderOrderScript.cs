@@ -1,5 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
+/*
+By Tyler McMillan
+Description: Script that rearranges objects sorting order depending on its y value on the screen
+*/
 using UnityEngine;
 
 public class SpriteRenderOrderScript : MonoBehaviour

@@ -287,7 +287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67ba4f5c95a0de248a45b73cd4a89115, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 1
+  _moveSpeed: 0.5
   _unitHealthBarSlider: {fileID: 8487920368973247629}
 --- !u!114 &5277102328528328597
 MonoBehaviour:
@@ -303,6 +303,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damageAmount: 1
   _unitHealthBarSlider: {fileID: 8487920368973247629}
+  _isBeamUnit: 0
 --- !u!114 &5277102328528328593
 MonoBehaviour:
   m_ObjectHideFlags: 0

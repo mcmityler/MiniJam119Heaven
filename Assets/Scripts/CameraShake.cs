@@ -1,3 +1,7 @@
+/*
+By Tyler McMillan
+Description: This script deals with the camera shake when the heavens gate reaches certain hp thresholds
+*/
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

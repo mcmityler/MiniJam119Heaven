@@ -280,6 +280,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damageAmount: 1
   _unitHealthBarSlider: {fileID: 4436855114910667202}
+  _isBeamUnit: 0
 --- !u!114 &100713312160565013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -292,9 +293,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69ded52aaf910294cb48fd76d9b6745a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 3
+  _maxHealth: 6
   _healthbar: {fileID: 4436855114910667203}
   _isPatrol: 1
+  _isHeavensGate: 0
 --- !u!114 &100713312160565015
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,5 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
+/*
+By Tyler McMillan
+Description: Script that deals with cloud arm angel unit, that instant kills any enemy that walks into it as long as its not the boss
+*/
 using UnityEngine;
 
 public class CloudArmScript : MonoBehaviour

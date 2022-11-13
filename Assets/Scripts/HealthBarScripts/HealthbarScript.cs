@@ -1,5 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
+/*
+By Tyler McMillan
+Description: Script that deals with changing the health bars size
+*/
 using UnityEngine;
 using UnityEngine.UI;
 

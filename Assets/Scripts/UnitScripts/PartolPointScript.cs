@@ -1,5 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
+/*
+By Tyler McMillan
+Description: Script that is for the patrol units flags that allows you to move them on the screen
+*/
 using UnityEngine;
 
 public class PartolPointScript : MonoBehaviour

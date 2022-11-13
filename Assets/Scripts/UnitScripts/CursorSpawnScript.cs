@@ -1,5 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
+/*
+By Tyler McMillan
+Description: Cursor Spawn Script works along side the spawn unit script, this script shows the hologram image of what unit / angel the player has selected on their cursor
+*/
 using UnityEngine;
 
 public class CursorSpawnScript : MonoBehaviour

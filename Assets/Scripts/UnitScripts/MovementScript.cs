@@ -1,4 +1,7 @@
-using System.Collections;
+/*
+By Tyler McMillan
+Description: Ally unit movement script that tells the hit script its an ally and that makes the patrol unit move between patrol flags
+*/
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -89,5 +92,8 @@ public class MovementScript : MonoBehaviour
             }
         }
 
+    }
+    public bool GetIsPatrol(){
+        return _isPatrol;
     }
 }

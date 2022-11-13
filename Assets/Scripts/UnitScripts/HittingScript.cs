@@ -1,4 +1,7 @@
-using System.Collections;
+/*
+By Tyler McMillan
+Description: Script that is both on allies and enemies and deals with attacking anims and dealing damage
+*/
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;

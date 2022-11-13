@@ -1,5 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
+/*
+By Tyler McMillan
+Description: Script that is attatched to the prayer unit that allows it to collect prayer points when its animation finishes
+*/
 using UnityEngine;
 
 public class PrayerUnitScript : MonoBehaviour

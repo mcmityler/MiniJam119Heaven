@@ -1,16 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
+/*
+By Tyler McMillan
+Description: Beam Angel unit script that fires beams of light at enemies doing damage; this script deals with checking where enemies are and what can be hit
+*/
 using UnityEngine;
 
 public class BeamHittingScript : MonoBehaviour
 {
-   [SerializeField] int _beamDamage = 1;
-   [SerializeField]GameObject _beamOfLight;
-    public void HitEnemyWithBeam(){
+    [SerializeField] int _beamDamage = 1;
+    [SerializeField] GameObject _beamOfLight;
+    public void HitEnemyWithBeam()
+    {
         GameObject _closestEnemy = FindClosestEnemy();
-        if(_closestEnemy != null){
-            
-             int _hitTargetHealth = -1;
+        if (_closestEnemy != null)
+        {
+
+            int _hitTargetHealth = -1;
             if (_closestEnemy != null)
             {
                 //make beam of light appear on target
@@ -22,7 +26,9 @@ public class BeamHittingScript : MonoBehaviour
             {
                 _closestEnemy.GetComponent<UnitHealthScript>().KillObject();
             }
-        }else{
+        }
+        else
+        {
             this.gameObject.GetComponent<Animator>().SetTrigger("Move");
         }
     }
@@ -35,18 +41,23 @@ public class BeamHittingScript : MonoBehaviour
         Vector3 position = transform.position;
         foreach (GameObject _enemy in enemies)
         {
-            Vector3 diff = _enemy.transform.position - position;
-            float curDistance = diff.sqrMagnitude;
-            if (curDistance < distance)
+            if (_enemy.GetComponent<EnemyMovementScript>().GetBeamable()) //ensure enemy you are trying to hit is on the screen
             {
-                _closestEnemy = _enemy;
-                distance = curDistance;
+                Vector3 diff = _enemy.transform.position - position;
+                float curDistance = diff.sqrMagnitude;
+                if (curDistance < distance)
+                {
+                    _closestEnemy = _enemy;
+                    distance = curDistance;
+                }
             }
         }
         return _closestEnemy;
     }
-    public void CheckEnemiesExist(){
-        if(FindClosestEnemy() != null){
+    public void CheckEnemiesExist()
+    {
+        if (FindClosestEnemy() != null)
+        {
             this.gameObject.GetComponent<Animator>().SetTrigger("Hit");
         }
     }

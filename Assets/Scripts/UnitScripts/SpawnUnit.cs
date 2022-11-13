@@ -1,5 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
+/*
+By Tyler McMillan
+Description: Spawn unit script deals with user clicking unit/angel buttons and spawns them where the user clicks. Also checks it is affordable
+*/
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,8 +12,8 @@ public class SpawnUnit : MonoBehaviour
     [SerializeField] GameObject _beamerUnit;
     [SerializeField] GameObject _cloudArmUnit;
 
-
-
+    [SerializeField] int _patrolCost, _prayerCost, _beamerCost, _cloudCost;
+    [SerializeField] Image _patrolButton, _prayerButton, _beamerButton, _cloudButton;
     bool _unitSelected = false;
     bool _isPatrol, _isPrayer, _isBeamer, _isCloudArm = false;
     [SerializeField] Image _lastButtonPressed;
@@ -20,6 +22,7 @@ public class SpawnUnit : MonoBehaviour
     void Start()
     {
         _cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        CheckCosts();
     }
 
     void Update()
@@ -29,9 +32,49 @@ public class SpawnUnit : MonoBehaviour
             LeftMouseClicked();
         }
     }
+    public void CheckCosts()
+    {
+        int m_pp = this.gameObject.GetComponent<PrayerPointScript>().GetPP();
+        if (m_pp < _prayerCost)
+        {
+            _prayerButton.color = Color.red;
+        }
+        else if (_prayerButton.color != Color.green)
+        {
+            _prayerButton.color = Color.white;
+        }
+        if (m_pp < _patrolCost)
+        {
+            _patrolButton.color = Color.red;
+        }
+        else if (_patrolButton.color != Color.green)
+        {
+            _patrolButton.color = Color.white;
+        }
+        if (m_pp < _beamerCost)
+        {
+            _beamerButton.color = Color.red;
+        }
+        else if (_beamerButton.color != Color.green)
+        {
+            _beamerButton.color = Color.white;
+        }
+        if (m_pp < _cloudCost)
+        {
+            _cloudButton.color = Color.red;
+        }
+        else if (_cloudButton.color != Color.green)
+        {
+            _cloudButton.color = Color.white;
+        }
+    }
     public void SelectUnit(Image m_thisButton)
     {
         _isPatrol = _isPrayer = _isBeamer = _isCloudArm = false; //automatically false unless told otherwise
+        if (m_thisButton.color == Color.red) //ignore this script if you cant afford button
+        {
+            return;
+        }
         if (m_thisButton.gameObject.tag == "PatrolUnitButton") //is a patrol unit if the patrol unit button was pressed
         {
             _isPatrol = true;
@@ -106,18 +149,25 @@ public class SpawnUnit : MonoBehaviour
             if (_isPatrol)
             {
                 Spawn("Patrol");
+                this.gameObject.GetComponent<PrayerPointScript>().AddPrayers(-_patrolCost);
             }
             if (_isPrayer)
             {
                 Spawn("Prayer");
+                this.gameObject.GetComponent<PrayerPointScript>().AddPrayers(-_prayerCost);
+
             }
             if (_isBeamer)
             {
                 Spawn("Beamer");
+                this.gameObject.GetComponent<PrayerPointScript>().AddPrayers(-_beamerCost);
+
             }
             if (_isCloudArm)
             {
                 Spawn("CloudArm");
+                this.gameObject.GetComponent<PrayerPointScript>().AddPrayers(-_cloudCost);
+
             }
         }
     }
@@ -139,7 +189,7 @@ public class SpawnUnit : MonoBehaviour
                 Instantiate(_beamerUnit, mousePosition, Quaternion.identity);
 
                 break;
-                case "CloudArm":
+            case "CloudArm":
                 Instantiate(_cloudArmUnit, mousePosition, Quaternion.identity);
 
                 break;
@@ -167,7 +217,7 @@ public class SpawnUnit : MonoBehaviour
         {
             _cursorUnit.ShowCloudArmUnit();
         }
-        else if ((_unitSelected == false && _isPrayer) || (_unitSelected == false && _isBeamer) || (_unitSelected == false && _isPatrol)||(_unitSelected == false && _isCloudArm))
+        else if ((_unitSelected == false && _isPrayer) || (_unitSelected == false && _isBeamer) || (_unitSelected == false && _isPatrol) || (_unitSelected == false && _isCloudArm))
         {
             _cursorUnit.HideCursorUnit();
 

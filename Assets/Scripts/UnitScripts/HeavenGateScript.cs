@@ -1,4 +1,7 @@
-using System.Collections;
+/*
+By Tyler McMillan
+Description: Heavens gate script that deals with the gate getting attacked and changing the sprite / shaking the screen
+*/
 using System.Collections.Generic;
 using UnityEngine;
 

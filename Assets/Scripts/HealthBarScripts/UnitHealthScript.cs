@@ -1,5 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
+/*
+By Tyler McMillan
+Description: Deals with each units individual health and death cycle
+*/
 using UnityEngine;
 
 public class UnitHealthScript : MonoBehaviour
@@ -9,6 +11,7 @@ public class UnitHealthScript : MonoBehaviour
 
     [SerializeField] private HealthbarScript _healthbar; //reference to the healthbar
     [SerializeField] bool _isPatrol = false;
+    [SerializeField] bool _isHeavensGate = false;
      CameraShake _cameraShake = null;
 
 
@@ -42,6 +45,9 @@ public class UnitHealthScript : MonoBehaviour
     }
     public void KillObject()
     {
+        if(_isHeavensGate){
+            GameObject.FindGameObjectWithTag("Manager").GetComponent<GameOverScript>().GameOver(); //call game over when the heavens gate is destroyed
+        }
         if (_isPatrol)
         {
             Destroy(this.gameObject.transform.parent.gameObject);
