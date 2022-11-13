@@ -7,9 +7,13 @@ public class SpawnUnit : MonoBehaviour
 {
     [SerializeField] GameObject _patrolUnit;
     [SerializeField] GameObject _prayerUnit;
+    [SerializeField] GameObject _beamerUnit;
+    [SerializeField] GameObject _cloudArmUnit;
+
+
 
     bool _unitSelected = false;
-    bool _isPatrol, _isPrayer = false;
+    bool _isPatrol, _isPrayer, _isBeamer, _isCloudArm = false;
     [SerializeField] Image _lastButtonPressed;
     [SerializeField] CursorSpawnScript _cursorUnit;
     Camera _cam;
@@ -27,7 +31,7 @@ public class SpawnUnit : MonoBehaviour
     }
     public void SelectUnit(Image m_thisButton)
     {
-        _isPatrol = _isPrayer = false; //automatically false unless told otherwise
+        _isPatrol = _isPrayer = _isBeamer = _isCloudArm = false; //automatically false unless told otherwise
         if (m_thisButton.gameObject.tag == "PatrolUnitButton") //is a patrol unit if the patrol unit button was pressed
         {
             _isPatrol = true;
@@ -35,6 +39,16 @@ public class SpawnUnit : MonoBehaviour
         else if (m_thisButton.gameObject.tag == "PrayerUnitButton")
         {
             _isPrayer = true;
+
+        }
+        else if (m_thisButton.gameObject.tag == "BeamMageUnitButton")
+        {
+            _isBeamer = true;
+
+        }
+        else if (m_thisButton.gameObject.tag == "CloudArmUnitButton")
+        {
+            _isCloudArm = true;
 
         }
         if (_lastButtonPressed == m_thisButton && _unitSelected) //what to do if they press the same button twice and its still selected (hasnt been placed yet)
@@ -68,7 +82,8 @@ public class SpawnUnit : MonoBehaviour
     {
 
         RaycastHit2D[] hits = Physics2D.RaycastAll(_cam.ScreenToWorldPoint(Input.mousePosition), new Vector3(0, 0, 1));
-
+        bool _hitAlly = false;
+        bool _hitManager = false;
         // If it hits something...
         foreach (var _hit in hits)
         {
@@ -77,58 +92,82 @@ public class SpawnUnit : MonoBehaviour
                 //Debug.Log(_hit.collider);
                 if (_hit.collider != null && _hit.collider.tag == "Manager")
                 {
-                    Debug.Log("hey");
-
-                    _unitSelected = false;
-                    if (_isPatrol)
-                    {
-                        SpawnPatrol();
-                    }
-                    if (_isPrayer)
-                    {
-                        SpawnPrayer();
-                    }
+                    _hitManager = true;
+                }
+                if (_hit.collider != null && _hit.collider.tag == "Ally")
+                {
+                    _hitAlly = true;
                 }
             }
         }
+        if (_hitManager && !_hitAlly)
+        {
+            _unitSelected = false;
+            if (_isPatrol)
+            {
+                Spawn("Patrol");
+            }
+            if (_isPrayer)
+            {
+                Spawn("Prayer");
+            }
+            if (_isBeamer)
+            {
+                Spawn("Beamer");
+            }
+            if (_isCloudArm)
+            {
+                Spawn("CloudArm");
+            }
+        }
     }
-    public void SpawnPatrol()
+    public void Spawn(string _unitName)
     {
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        Instantiate(_patrolUnit, mousePosition, Quaternion.identity);
+        switch (_unitName)
+        {
+            case "Patrol":
+
+                Instantiate(_patrolUnit, mousePosition, Quaternion.identity);
+                break;
+            case "Prayer":
+
+                Instantiate(_prayerUnit, mousePosition, Quaternion.identity);
+                break;
+            case "Beamer":
+                Instantiate(_beamerUnit, mousePosition, Quaternion.identity);
+
+                break;
+                case "CloudArm":
+                Instantiate(_cloudArmUnit, mousePosition, Quaternion.identity);
+
+                break;
+        }
+
         _unitSelected = false;
         _lastButtonPressed.color = Color.white;
         _cursorUnit.HideCursorUnit();
-
     }
-    public void SpawnPrayer()
-    {
-        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-        Instantiate(_prayerUnit, mousePosition, Quaternion.identity);
-        _unitSelected = false;
-        _lastButtonPressed.color = Color.white;
-        _cursorUnit.HideCursorUnit();
-
-    }
-
     void ShowCursor()
     {
         if (_unitSelected && _isPatrol)
         {
             _cursorUnit.ShowPatrol();
         }
-        else if (_unitSelected == false && _isPatrol)
-        {
-            _cursorUnit.HideCursorUnit();
-
-        }
         else if (_unitSelected && _isPrayer)
         {
             _cursorUnit.ShowPrayerUnit();
         }
-        else if (_unitSelected == false && _isPrayer)
+        else if (_unitSelected && _isBeamer)
+        {
+            _cursorUnit.ShowBeamerUnit();
+        }
+        else if (_unitSelected && _isCloudArm)
+        {
+            _cursorUnit.ShowCloudArmUnit();
+        }
+        else if ((_unitSelected == false && _isPrayer) || (_unitSelected == false && _isBeamer) || (_unitSelected == false && _isPatrol)||(_unitSelected == false && _isCloudArm))
         {
             _cursorUnit.HideCursorUnit();
 

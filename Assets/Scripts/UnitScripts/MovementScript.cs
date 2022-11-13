@@ -24,31 +24,36 @@ public class MovementScript : MonoBehaviour
     void Start()
     {
         _tempSpeed = _moveSpeed;
-        _patrolPoints[_currentPatrolPoint].GetComponent<SpriteRenderer>().color = TrackingColour;
-        _patrolPoints[_currentPatrolPoint].GetComponent<SpriteRenderer>().sprite = _flagUp;
-
+        if (_isPatrol)
+        {
+            _patrolPoints[_currentPatrolPoint].GetComponent<SpriteRenderer>().color = TrackingColour;
+            _patrolPoints[_currentPatrolPoint].GetComponent<SpriteRenderer>().sprite = _flagUp;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector3 _dir = _patrolPoints[_currentPatrolPoint].transform.localPosition - this.transform.localPosition;
-        this.gameObject.transform.localPosition += _dir.normalized * Time.deltaTime * _moveSpeed; //move towards heaven gate to attack (use normalize to find unit vector so its always the same speed)
-        if (_dir.x > 0 && _moveSpeed > 0) //moving to the right
+        if (_isPatrol)
         {
-           // this.gameObject.GetComponent<SpriteRenderer>().flipX = true;
+            Vector3 _dir = _patrolPoints[_currentPatrolPoint].transform.localPosition - this.transform.localPosition;
+            this.gameObject.transform.localPosition += _dir.normalized * Time.deltaTime * _moveSpeed; //move towards heaven gate to attack (use normalize to find unit vector so its always the same speed)
+            if (_dir.x > 0 && _moveSpeed > 0) //moving to the right
+            {
+                // this.gameObject.GetComponent<SpriteRenderer>().flipX = true;
 
-            transform.right = Vector3.left;
-            _unitHealthBarSlider.direction = Slider.Direction.RightToLeft;
+                transform.right = Vector3.left;
+                _unitHealthBarSlider.direction = Slider.Direction.RightToLeft;
 
-        }
-        else if (_dir.x < 0 && _moveSpeed > 0) //moving to the left
-        {
-            //this.gameObject.GetComponent<SpriteRenderer>().flipX = false;
-            transform.right = Vector3.right;
-            _unitHealthBarSlider.direction = Slider.Direction.LeftToRight;
+            }
+            else if (_dir.x < 0 && _moveSpeed > 0) //moving to the left
+            {
+                //this.gameObject.GetComponent<SpriteRenderer>().flipX = false;
+                transform.right = Vector3.right;
+                _unitHealthBarSlider.direction = Slider.Direction.LeftToRight;
 
 
+            }
         }
     }
     public void StopMovement() //stop enemy cause its attacking

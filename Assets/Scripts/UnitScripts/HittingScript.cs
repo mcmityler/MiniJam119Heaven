@@ -11,6 +11,7 @@ public class HittingScript : MonoBehaviour
     bool _isEnemy = false;
     [SerializeField] private int _damageAmount = 1;
     [SerializeField] Slider _unitHealthBarSlider;
+    [SerializeField] bool _isBeamUnit = false;
 
     // Start is called before the first frame update
     void Start()
@@ -42,15 +43,15 @@ public class HittingScript : MonoBehaviour
         {
             _allyMovementScript.StopMovement();
         }
-        if (this.transform.position.x - m_targetToHit.transform.position.x < 0 ) //target is to the right
+        if (this.transform.position.x - m_targetToHit.transform.position.x < 0) //target is to the right
         {
-           // this.gameObject.GetComponent<SpriteRenderer>().flipX = true;
+            // this.gameObject.GetComponent<SpriteRenderer>().flipX = true;
 
             transform.right = Vector3.left;
             _unitHealthBarSlider.direction = Slider.Direction.RightToLeft;
 
         }
-        else  if (this.transform.position.x - m_targetToHit.transform.position.x < 0 ) //target is to the left
+        else if (this.transform.position.x - m_targetToHit.transform.position.x < 0) //target is to the left
 
         {
             //this.gameObject.GetComponent<SpriteRenderer>().flipX = false;
@@ -70,6 +71,7 @@ public class HittingScript : MonoBehaviour
             if (m_hitTarget != null)
             {
                 _hitTargetHealth = m_hitTarget.GetComponent<UnitHealthScript>().TakeDamage(_damageAmount);
+                
             }
             if (_hitTargetHealth < 1 && m_hitTarget != null) //do this if this object killed something
             {
@@ -113,5 +115,10 @@ public class HittingScript : MonoBehaviour
                 InAttackRange(col.gameObject);
             }
         }
+    }
+
+    public void PlayGlassSound()
+    {
+        FindObjectOfType<AudioManager>().Play("GlassSound");
     }
 }

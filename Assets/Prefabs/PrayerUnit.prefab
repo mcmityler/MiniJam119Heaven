@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 632358575703695882}
   - component: {fileID: 632358575703695883}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: Unit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 632358576431099809}
   - component: {fileID: 632358576431099810}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: Page
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -182,7 +182,7 @@ GameObject:
   - component: {fileID: 632358576662789366}
   - component: {fileID: 632358576662789370}
   - component: {fileID: 632358576662789369}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: PrayerUnit
   m_TagString: Ally
   m_Icon: {fileID: 0}
@@ -307,7 +307,7 @@ GameObject:
   - component: {fileID: 4683433614625433336}
   - component: {fileID: 4683433614625433338}
   - component: {fileID: 4683433614625433339}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: ProgressBarBG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -383,7 +383,7 @@ GameObject:
   - component: {fileID: 4683433615080707560}
   - component: {fileID: 4683433615080707562}
   - component: {fileID: 4683433615080707563}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: ProgressBarFill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -458,7 +458,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4683433615105079044}
   - component: {fileID: 4683433615105079047}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: ProgressBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -550,7 +550,7 @@ GameObject:
   - component: {fileID: 4683433616330588588}
   - component: {fileID: 4683433616330588589}
   - component: {fileID: 4683433616330588594}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: ProgressBarCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}

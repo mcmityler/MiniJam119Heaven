@@ -5,7 +5,7 @@ using UnityEngine;
 public class CursorSpawnScript : MonoBehaviour
 {
     [SerializeField] GameObject _spawnImage;
-    [SerializeField] Sprite _patrolUnitSprite, _prayerUnitSprite;
+    [SerializeField] Sprite _patrolUnitSprite, _prayerUnitSprite, _beamerUnitSprite,_cloudArmUnitSprite;
     bool _showing = false;
     void Start(){
         HideCursorUnit();
@@ -25,6 +25,16 @@ public class CursorSpawnScript : MonoBehaviour
     public void ShowPrayerUnit(){
         _spawnImage.SetActive(true);
         _spawnImage.GetComponent<SpriteRenderer>().sprite = _prayerUnitSprite;
+        _showing = true;
+    }
+     public void ShowBeamerUnit(){
+        _spawnImage.SetActive(true);
+        _spawnImage.GetComponent<SpriteRenderer>().sprite = _beamerUnitSprite;
+        _showing = true;
+    }
+     public void ShowCloudArmUnit(){
+        _spawnImage.SetActive(true);
+        _spawnImage.GetComponent<SpriteRenderer>().sprite = _cloudArmUnitSprite;
         _showing = true;
     }
 

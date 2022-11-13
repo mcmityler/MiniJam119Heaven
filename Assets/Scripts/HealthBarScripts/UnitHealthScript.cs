@@ -9,6 +9,7 @@ public class UnitHealthScript : MonoBehaviour
 
     [SerializeField] private HealthbarScript _healthbar; //reference to the healthbar
     [SerializeField] bool _isPatrol = false;
+     CameraShake _cameraShake = null;
 
 
     // Start is called before the first frame update
@@ -16,6 +17,8 @@ public class UnitHealthScript : MonoBehaviour
     {
         _currentHealth = _maxHealth;
         _healthbar.SetMaxHealth(_maxHealth);
+        _cameraShake = Camera.main.gameObject.GetComponent<CameraShake>();
+
     }
 
     // Update is called once per frame
@@ -30,6 +33,11 @@ public class UnitHealthScript : MonoBehaviour
     {
         _currentHealth -= m_damage;
         _healthbar.SetHealth(_currentHealth);
+        if (this.gameObject.name == "HeavenGate" && (_currentHealth == 25|| _currentHealth == 19 || _currentHealth == 15|| _currentHealth == 9|| _currentHealth == 5))
+        {
+            StartCoroutine(_cameraShake.Shake(0.1f, 0.1f)); //make camera shake whenever you take damage
+            this.gameObject.GetComponent<HeavenGateScript>().ChangeSprite();
+        }
         return _currentHealth;
     }
     public void KillObject()

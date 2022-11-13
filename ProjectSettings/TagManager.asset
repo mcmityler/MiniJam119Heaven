@@ -11,6 +11,9 @@ TagManager:
   - Manager
   - PatrolUnitButton
   - PrayerUnitButton
+  - BeamMageUnitButton
+  - Background
+  - CloudArmUnitButton
   layers:
   - Default
   - TransparentFX
