@@ -287,7 +287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67ba4f5c95a0de248a45b73cd4a89115, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 0.5
+  _moveSpeed: 0.66
   _unitHealthBarSlider: {fileID: 8487920368973247629}
 --- !u!114 &5277102328528328597
 MonoBehaviour:
@@ -319,6 +319,7 @@ MonoBehaviour:
   _maxHealth: 3
   _healthbar: {fileID: 8487920368973247628}
   _isPatrol: 0
+  _isHeavensGate: 0
 --- !u!1001 &5277102329257066909
 PrefabInstance:
   m_ObjectHideFlags: 0

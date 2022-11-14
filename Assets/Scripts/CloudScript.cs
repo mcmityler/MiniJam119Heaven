@@ -7,21 +7,25 @@ using UnityEngine;
 public class CloudScript : MonoBehaviour
 {
     // Start is called before the first frame update
-[SerializeField] Animator _unitButtonAnimator;
-[SerializeField] Animator _startScreenAnimator;
-[SerializeField] GameObject _manager;
+    [SerializeField] Animator _unitButtonAnimator;
+    [SerializeField] Animator _startScreenAnimator;
+    [SerializeField] GameObject _manager;
+    [SerializeField] GameObject _creditButton;
+
 
     void Start()
     {
         RandomizeIdleSpeed();
     }
-    void RandomizeIdleSpeed(){
+    void RandomizeIdleSpeed()
+    {
         foreach (var _cloudAnimator in this.gameObject.GetComponentsInChildren<Animator>())
         {
-            _cloudAnimator.SetFloat("idleSpeed", Random.Range(0.005f,0.06f));
+            _cloudAnimator.SetFloat("idleSpeed", Random.Range(0.005f, 0.06f));
         }
     }
-    public void StartGame(){
+    public void StartGame()
+    {
         foreach (var _cloud in this.gameObject.GetComponentsInChildren<CloudMovementScript>())
         {
             _cloud.StartMovement();
@@ -29,6 +33,7 @@ public class CloudScript : MonoBehaviour
         _unitButtonAnimator.SetTrigger("StartGame");
         _startScreenAnimator.SetTrigger("StartGame");
         _manager.GetComponent<EnemyWaveScript>().StartWaves();
-        Destroy(transform.parent.gameObject,5f);
+        _creditButton.SetActive(false);
+        Destroy(transform.parent.gameObject, 5f);
     }
 }

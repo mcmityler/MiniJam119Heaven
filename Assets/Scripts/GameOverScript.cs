@@ -18,6 +18,7 @@ public class GameOverScript : MonoBehaviour
     float _counter = 0;
     bool _gameOver = false;
     [SerializeField] GameObject _heavensGate;
+    [SerializeField] GameObject _creditButton;
     void Update()
     {
         if (_gameOver && _fireCounter < _maxFire) //spawn infinite Fires
@@ -47,17 +48,23 @@ public class GameOverScript : MonoBehaviour
         _gameOverText.SetActive(true);
         //spawn restart button and game over text
         _restartButton.SetActive(true);
+        _creditButton.SetActive(true);
+
+
         //stop waves from spawning
         this.gameObject.GetComponent<EnemyWaveScript>().StopWaves();
 
         _gameOver = true;
     }
-    public void Winner(){
+    public void Winner()
+    {
         //spawn restart button and game over text
         _restartButton.SetActive(true);
         //stop waves from spawning
         this.gameObject.GetComponent<EnemyWaveScript>().StopWaves();
         _winnerText.SetActive(true);
+        _creditButton.SetActive(true);
+
     }
     public void RestartGame()
     {
@@ -102,9 +109,11 @@ public class GameOverScript : MonoBehaviour
         _gameOver = false;
 
         //spawn new HeavensGate
-        Instantiate(_heavensGate,Vector3.zero,Quaternion.identity);
+        Instantiate(_heavensGate, Vector3.zero, Quaternion.identity);
 
         _winnerText.SetActive(false);
+        _creditButton.SetActive(false);
+
 
 
     }

@@ -34,7 +34,7 @@ public class AudioManager : MonoBehaviour
             s.source.pitch = s.pitch;
             s.source.loop = s.loop;
         }
-        //ToggleBackgroundMusic(); //START BACKGROUND MUSIC
+        ToggleBackgroundMusic(); //START BACKGROUND MUSIC
     }
 
 
@@ -55,13 +55,17 @@ public class AudioManager : MonoBehaviour
     public void ToggleSound()
     {
         _soundMuted = !_soundMuted;
+        ToggleBackgroundMusic();
     }
     public void ToggleSoundButton(GameObject m_buttonPressed)
     {
         _soundMuted = !_soundMuted;
-        if(_soundMuted == true){
+        if (_soundMuted == true)
+        {
             m_buttonPressed.GetComponent<Image>().color = Color.red;
-        }else{
+        }
+        else
+        {
             m_buttonPressed.GetComponent<Image>().color = Color.white;
 
         }
@@ -71,7 +75,7 @@ public class AudioManager : MonoBehaviour
         _musicMuted = !_musicMuted;
         if (_musicMuted == false)
         {
-            //Play("backgroundMusic");
+            Play("backgroundMusic");
         }
         else
         {

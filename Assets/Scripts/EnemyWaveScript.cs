@@ -14,11 +14,13 @@ public class EnemyWaveScript : MonoBehaviour
     [SerializeField] GameObject _waveNumText;
 
     [SerializeField] GameObject _basicEnemyUnit;
+    [SerializeField] GameObject _tankEnemyUnit;
+
     int _maxWaves = 5;
     bool _gameStarted = false;
     void Start()
     {
-        _timeBetweenWaves = 1f; //make waves take longer to spawn
+        _timeBetweenWaves = 7f; //make waves take longer to spawn
 
     }
     void Update()
@@ -27,6 +29,14 @@ public class EnemyWaveScript : MonoBehaviour
         {
             _counter += Time.deltaTime;
             if (_counter > _timeBetweenWaves)
+            {
+                _counter = 0;
+                _waveNum++;
+                SpawnNextWave();
+                _waveNumText.GetComponent<TMP_Text>().text = "Wave " + _waveNum.ToString();
+                _waveNumText.GetComponent<Animator>().SetTrigger("WaveNum");
+            }
+            else if (GameObject.FindGameObjectWithTag("Enemy") == null && _waveNum != 0) //spawn next wave if you killed all units and are still waiting for a timer
             {
                 _counter = 0;
                 _waveNum++;
@@ -67,37 +77,70 @@ public class EnemyWaveScript : MonoBehaviour
                 SpawnUnit(_topSpawnBox, _basicEnemyUnit);
                 SpawnUnit(_topSpawnBox, _basicEnemyUnit);
                 SpawnUnit(_topSpawnBox, _basicEnemyUnit);
-                _timeBetweenWaves = 15f; //make waves take longer to spawn
+                _timeBetweenWaves = 30f; //make waves take longer to spawn
                 break;
             case 2:
                 SpawnUnit(_botSpawnBox, _basicEnemyUnit);
                 SpawnUnit(_botSpawnBox, _basicEnemyUnit);
                 SpawnUnit(_botSpawnBox, _basicEnemyUnit);
-                SpawnUnit(_botSpawnBox, _basicEnemyUnit);
+                SpawnUnit(_topSpawnBox, _basicEnemyUnit);
+                SpawnUnit(_topSpawnBox, _basicEnemyUnit);
+                _timeBetweenWaves = 20f;
+
                 break;
             case 3:
                 SpawnUnit(_leftSpawnBox, _basicEnemyUnit);
                 SpawnUnit(_leftSpawnBox, _basicEnemyUnit);
                 SpawnUnit(_leftSpawnBox, _basicEnemyUnit);
                 SpawnUnit(_leftSpawnBox, _basicEnemyUnit);
-                SpawnUnit(_leftSpawnBox, _basicEnemyUnit);
+                SpawnUnit(_leftSpawnBox, _tankEnemyUnit);
+
+
+                SpawnUnit(_rightSpawnBox, _basicEnemyUnit);
+                SpawnUnit(_rightSpawnBox, _basicEnemyUnit);
+                SpawnUnit(_rightSpawnBox, _basicEnemyUnit);
+                SpawnUnit(_rightSpawnBox, _basicEnemyUnit);
+                SpawnUnit(_rightSpawnBox, _tankEnemyUnit);
+                _timeBetweenWaves = 15f;
+
                 break;
             case 4:
                 SpawnUnit(_rightSpawnBox, _basicEnemyUnit);
                 SpawnUnit(_rightSpawnBox, _basicEnemyUnit);
-                SpawnUnit(_rightSpawnBox, _basicEnemyUnit);
-                SpawnUnit(_rightSpawnBox, _basicEnemyUnit);
-                SpawnUnit(_rightSpawnBox, _basicEnemyUnit);
+                SpawnUnit(_botSpawnBox, _basicEnemyUnit);
+                SpawnUnit(_botSpawnBox, _basicEnemyUnit);
+                SpawnUnit(_botSpawnBox, _basicEnemyUnit);
+                SpawnUnit(_botSpawnBox, _tankEnemyUnit);
+                SpawnUnit(_topSpawnBox, _basicEnemyUnit);
+                SpawnUnit(_topSpawnBox, _tankEnemyUnit);
+                _timeBetweenWaves = 10f;
                 break;
             case 5:
                 SpawnUnit(_rightSpawnBox, _basicEnemyUnit);
                 SpawnUnit(_rightSpawnBox, _basicEnemyUnit);
+                SpawnUnit(_rightSpawnBox, _tankEnemyUnit);
+                SpawnUnit(_rightSpawnBox, _tankEnemyUnit);
+                SpawnUnit(_rightSpawnBox, _tankEnemyUnit);
+
+
                 SpawnUnit(_leftSpawnBox, _basicEnemyUnit);
                 SpawnUnit(_leftSpawnBox, _basicEnemyUnit);
+                SpawnUnit(_leftSpawnBox, _basicEnemyUnit);
+                SpawnUnit(_leftSpawnBox, _tankEnemyUnit);
+
                 SpawnUnit(_botSpawnBox, _basicEnemyUnit);
                 SpawnUnit(_botSpawnBox, _basicEnemyUnit);
+                SpawnUnit(_botSpawnBox, _tankEnemyUnit);
+                SpawnUnit(_botSpawnBox, _tankEnemyUnit);
+                SpawnUnit(_botSpawnBox, _tankEnemyUnit);
+
+
                 SpawnUnit(_topSpawnBox, _basicEnemyUnit);
                 SpawnUnit(_topSpawnBox, _basicEnemyUnit);
+                SpawnUnit(_topSpawnBox, _basicEnemyUnit);
+                SpawnUnit(_topSpawnBox, _basicEnemyUnit);
+                SpawnUnit(_topSpawnBox, _basicEnemyUnit);
+
 
                 break;
         }
@@ -107,7 +150,7 @@ public class EnemyWaveScript : MonoBehaviour
     {
         _waveNum = 0;
         _counter = 0;
-        _timeBetweenWaves = 7f;
+        _timeBetweenWaves = 6f;
         _waveNumText.GetComponent<TMP_Text>().text = "Starting Game";
         _waveNumText.GetComponent<Animator>().SetTrigger("WaveNum");
         StartWaves();

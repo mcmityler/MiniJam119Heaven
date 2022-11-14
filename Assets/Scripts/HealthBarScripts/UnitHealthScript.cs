@@ -12,7 +12,7 @@ public class UnitHealthScript : MonoBehaviour
     [SerializeField] private HealthbarScript _healthbar; //reference to the healthbar
     [SerializeField] bool _isPatrol = false;
     [SerializeField] bool _isHeavensGate = false;
-     CameraShake _cameraShake = null;
+    CameraShake _cameraShake = null;
 
 
     // Start is called before the first frame update
@@ -36,16 +36,21 @@ public class UnitHealthScript : MonoBehaviour
     {
         _currentHealth -= m_damage;
         _healthbar.SetHealth(_currentHealth);
-        if (this.gameObject.name == "HeavenGate" && (_currentHealth == 25|| _currentHealth == 19 || _currentHealth == 15|| _currentHealth == 9|| _currentHealth == 5))
+        if (this.gameObject.tag == "HeavenGate")
         {
-            StartCoroutine(_cameraShake.Shake(0.1f, 0.1f)); //make camera shake whenever you take damage
-            this.gameObject.GetComponent<HeavenGateScript>().ChangeSprite();
+            this.gameObject.GetComponentInChildren<ParticleSystem>().Play();
+            if (_currentHealth == 25 || _currentHealth == 19 || _currentHealth == 15 || _currentHealth == 9 || _currentHealth == 5)
+            {
+                StartCoroutine(_cameraShake.Shake(0.1f, 0.1f)); //make camera shake whenever you take damage
+                this.gameObject.GetComponent<HeavenGateScript>().ChangeSprite();
+            }
         }
         return _currentHealth;
     }
     public void KillObject()
     {
-        if(_isHeavensGate){
+        if (_isHeavensGate)
+        {
             GameObject.FindGameObjectWithTag("Manager").GetComponent<GameOverScript>().GameOver(); //call game over when the heavens gate is destroyed
         }
         if (_isPatrol)

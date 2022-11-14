@@ -9,8 +9,13 @@ public class CursorSpawnScript : MonoBehaviour
     [SerializeField] GameObject _spawnImage;
     [SerializeField] Sprite _patrolUnitSprite, _prayerUnitSprite, _beamerUnitSprite,_cloudArmUnitSprite;
     bool _showing = false;
+    public Texture2D cursorTexture;
+    public CursorMode cursorMode = CursorMode.Auto;
+    public Vector2 hotSpot = Vector2.zero;
     void Start(){
         HideCursorUnit();
+        Cursor.SetCursor(cursorTexture, hotSpot, cursorMode);
+        
     }
     void Update(){
         if(_showing){
